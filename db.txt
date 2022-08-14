@@ -1,0 +1,16 @@
+---------------------------------------------------------
+Easy:
+Operadores ternários em vez de ifs
+---------------------------------------------------------
+Medium:
+Create Items
+
+Update animations
+---------------------------------------------------------
+Hard:
+Create a mini Inventory
+Create Demon Eat Animation
+Add items
+---------------------------------------------------------
+Super Hard:
+Add multiplayer

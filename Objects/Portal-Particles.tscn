@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.34431, 0.0758667, 0.441406, 1, 1, 1, 1, 1 )
+
+[node name="Particles2D" type="CPUParticles2D"]
+scale = Vector2( 5, 5 )
+amount = 24
+emission_shape = 2
+emission_rect_extents = Vector2( 10, 10 )
+direction = Vector2( 0, -1 )
+spread = 60.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 2.0
+color = Color( 0.466667, 0.0235294, 0.831373, 1 )
+color_ramp = SubResource( 1 )

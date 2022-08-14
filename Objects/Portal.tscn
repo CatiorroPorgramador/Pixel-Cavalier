@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Objects/Portal-Particles.tscn" type="PackedScene" id=1]
+
+[sub_resource type="RectangleShape2D" id=47]
+extents = Vector2( 16, 28.375 )
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.34431, 0.0758667, 0.441406, 1, 1, 1, 1, 1 )
+
+[node name="Portal" type="Area2D"]
+position = Vector2( 243, 114 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -4, -13.625 )
+shape = SubResource( 47 )
+
+[node name="Particles2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( -4, -12 )
+scale = Vector2( 3, 3 )
+amount = 30
+lifetime = 2.0
+emission_rect_extents = Vector2( 5, 8 )
+color_ramp = SubResource( 1 )
