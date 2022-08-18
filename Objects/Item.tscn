@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/Item.gd" type="Script" id=1]
 [ext_resource path="res://Data/Weapons/weapon_axe.png" type="Texture" id=2]
 [ext_resource path="res://Data/Inventory/Inventory Sprite Sheet.png" type="Texture" id=3]
-[ext_resource path="res://Data/Pixel.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Data/UiDefault.tres" type="Theme" id=4]
 
 [sub_resource type="PhysicsMaterial" id=40]
 bounce = 0.1
@@ -11,13 +11,6 @@ bounce = 0.1
 [sub_resource type="RectangleShape2D" id=41]
 
 [sub_resource type="RectangleShape2D" id=42]
-
-[sub_resource type="DynamicFont" id=43]
-size = 13
-font_data = ExtResource( 4 )
-
-[sub_resource type="Theme" id=44]
-Label/fonts/font = SubResource( 43 )
 
 [node name="Item" type="RigidBody2D"]
 position = Vector2( 198, 34 )
@@ -56,12 +49,9 @@ margin_top = -25.6
 margin_right = 150.0
 margin_bottom = 11.4
 rect_scale = Vector2( 0.331629, 0.331629 )
-theme = SubResource( 44 )
+theme = ExtResource( 4 )
 text = "    PRESS E
 TO INTERACT"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [connection signal="body_entered" from="InteractArea" to="." method="_on_InteractArea_body_entered"]
 [connection signal="body_exited" from="InteractArea" to="." method="_on_InteractArea_body_exited"]

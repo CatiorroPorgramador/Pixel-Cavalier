@@ -14,8 +14,8 @@ var collision
 
 # ------------------------------------------------------------------------------
 func movement_control(delta: float) -> void:
-	if ($RayCast.is_colliding()):
-		if $RayCast.get_collider().is_in_group("Tilemap"):
+	if $RayCast.is_colliding():
+		if $RayCast.get_collider().name == "TileMap":
 			scale.x = -scale.x
 	
 	motion.x = -scale.y * speed

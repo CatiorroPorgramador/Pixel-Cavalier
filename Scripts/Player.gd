@@ -12,17 +12,17 @@ export var item_tscn:PackedScene
 var items = {
 	"Knife": {
 		"texture": preload("res://Data/Weapons/weapon_knife.png"),
-		"hit pos": Vector2(),
+		"hit pos": Vector2.ZERO,
 		"damage": 20,
 	},
 	"Axe": {
 		"texture": preload("res://Data/Weapons/weapon_axe.png"),
-		"hit pos": Vector2(),
+		"hit pos": Vector2.ZERO,
 		"damage": 40,
 	},
 	"Hammer": {
 		"texture": preload("res://Data/Weapons/weapon_knife.png"),
-		"hit pos": Vector2(),
+		"hit pos": Vector2.ZERO,
 		"damage": 60,
 	}
 }
@@ -43,12 +43,12 @@ var angle_for_attack:float
 var side:bool = false # false = left | right = true
 
 onready var inventory_canvas = [
-	get_parent().get_node("UI/Inventory/Slot1"),
-	get_parent().get_node("UI/Inventory/Slot2"),
+	get_node("UI/Inventory/Slot1"),
+	get_node("UI/Inventory/Slot2"),
 ]
 onready var inventory_canvas_slots = [
-	get_parent().get_node("UI/Inventory/Slot1/Sprite"),
-	get_parent().get_node("UI/Inventory/Slot2/Sprite"),
+	get_node("UI/Inventory/Slot1/Sprite"),
+	get_node("UI/Inventory/Slot2/Sprite"),
 ]
 
 var inventory = [
@@ -83,7 +83,6 @@ func climb_control() -> void:
 
 func attack_control() -> void:
 	if $RayCastAttack.is_colliding():
-		var col = $RayCastAttack.get_collider()
 		if range(inventory.size()).has(index_item): $Gun/AnimationPlayer.play("Attack")
 
 func inventory_control() -> void:
@@ -140,14 +139,14 @@ func update_inventory() -> void:
 		slot.texture = item
 
 func update_ui() -> void:
-	get_parent().get_node('UI').update_ui()
+	get_node('UI').update_ui()
 
 func weapon_stuff() -> void:
 	$Gun.rotation_degrees = angle_for_attack
 	$RayCastAttack.rotation_degrees = $Gun.rotation_degrees - 90
 	$Sprite.flip_h = side
 	
-	if (side): $Gun.scale.y = -1
+	if side: $Gun.scale.y = -1
 	else: $Gun.scale.y = 1
 
 func animation_control() -> void:
@@ -202,9 +201,6 @@ func _process(_delta:float) -> void:
 	attack_control()
 	weapon_stuff()
 	inventory_control()
-	
-	if Input.is_action_just_pressed("ui_change_scene"):
-		get_tree().change_scene("res://Scenes/ChangeScene.tscn")
 	
 	if hearts <= 0:
 		emit_signal('is_dead')

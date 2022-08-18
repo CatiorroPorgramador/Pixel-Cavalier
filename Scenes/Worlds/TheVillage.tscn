@@ -1,22 +1,16 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Data/Tiles/Terrain (16x16).png" type="Texture" id=1]
 [ext_resource path="res://Data/Background/TheVillage/1 - Foreground_scenery.png" type="Texture" id=2]
 [ext_resource path="res://Data/Background/TheVillage/2 - Hills.png" type="Texture" id=3]
 [ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/controls/tile_0427.png" type="Texture" id=5]
+[ext_resource path="res://Data/Flags/Place.png" type="Texture" id=5]
+[ext_resource path="res://Data/Flags/Village-Flag.png" type="Texture" id=6]
+[ext_resource path="res://Data/Other/Arrow.png" type="Texture" id=7]
+[ext_resource path="res://Data/UiDefault.tres" type="Theme" id=8]
 [ext_resource path="res://Data/Background/TheVillage/4 - Cloud_cover_2.png" type="Texture" id=12]
 [ext_resource path="res://Data/Background/TheVillage/3 - Cloud_cover_1.png" type="Texture" id=13]
-[ext_resource path="res://Scripts/UI.gd" type="Script" id=14]
 [ext_resource path="res://Objects/Portal.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Data/Inventory/Inventory Sprite Sheet.png" type="Texture" id=16]
-[ext_resource path="res://Data/Hearts-Life/ui_heart_full.png" type="Texture" id=17]
-[ext_resource path="res://assets/controls/tile_0425.png" type="Texture" id=18]
-[ext_resource path="res://assets/controls/tile_0167.png" type="Texture" id=19]
-[ext_resource path="res://assets/controls/tile_0087.png" type="Texture" id=20]
-[ext_resource path="res://Data/Hearts-Life/ui_heart_empty.png" type="Texture" id=21]
-[ext_resource path="res://assets/controls/tile_0085.png" type="Texture" id=22]
-[ext_resource path="res://assets/controls/joystick.png" type="Texture" id=23]
 
 [sub_resource type="ConvexPolygonShape2D" id=72]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -2375,12 +2369,6 @@ shader = SubResource( 101 )
 shader_param/dir = Vector2( 1, 0 )
 shader_param/speed = 0.02
 
-[sub_resource type="RectangleShape2D" id=102]
-
-[sub_resource type="CubeMesh" id=103]
-
-[sub_resource type="CubeMesh" id=104]
-
 [node name="TheVillage" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -2402,6 +2390,37 @@ position = Vector2( 822, 213 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/LimitRight"]
 position = Vector2( 0, -101.5 )
 shape = SubResource( 71 )
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Place" type="Sprite" parent="Level"]
+position = Vector2( 638, 112 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+
+[node name="Flag" type="TextureRect" parent="Level/Place"]
+margin_left = -14.25
+margin_top = -6.25
+margin_right = 1.75
+margin_bottom = 1.75
+texture = ExtResource( 6 )
+expand = true
+
+[node name="Arrow" type="TextureRect" parent="Level/Place"]
+margin_left = 4.0
+margin_top = -6.0
+margin_right = 12.0
+margin_bottom = 2.0
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="Level/Place"]
+margin_left = -14.0
+margin_top = 3.0
+margin_right = 40.0
+margin_bottom = 20.0
+rect_scale = Vector2( 0.2, 0.2 )
+theme = ExtResource( 8 )
+text = "battle zone"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -2456,142 +2475,11 @@ centered = false
 
 [node name="PortalCenter" parent="." instance=ExtResource( 15 )]
 position = Vector2( 0, 209 )
+scene_to = "res://Scenes//ChangeScene.tscn"
 
 [node name="PortalLeft" parent="." instance=ExtResource( 15 )]
 position = Vector2( -780, 209 )
 
 [node name="PortalRight" parent="." instance=ExtResource( 15 )]
 position = Vector2( 800, 209 )
-
-[node name="UI" type="CanvasLayer" parent="."]
-script = ExtResource( 14 )
-
-[node name="Inventory" type="Node2D" parent="UI"]
-visible = false
-position = Vector2( 10, 5 )
-scale = Vector2( 2.5, 2.5 )
-
-[node name="Slot1" type="Sprite" parent="UI/Inventory"]
-texture = ExtResource( 16 )
-centered = false
-hframes = 2
-frame = 1
-
-[node name="Touch" type="TouchScreenButton" parent="UI/Inventory/Slot1"]
-scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 102 )
-action = "ui_select_item_1"
-
-[node name="Sprite" type="Sprite" parent="UI/Inventory/Slot1"]
-position = Vector2( 5, 5 )
-rotation = -0.785398
-scale = Vector2( 0.4, 0.4 )
-
-[node name="Slot2" type="Sprite" parent="UI/Inventory"]
-position = Vector2( 10, 0 )
-texture = ExtResource( 16 )
-centered = false
-hframes = 2
-frame = 1
-
-[node name="Sprite" type="Sprite" parent="UI/Inventory/Slot2"]
-position = Vector2( 5, 5 )
-rotation = -0.785398
-scale = Vector2( 0.4, 0.4 )
-
-[node name="Touch" type="TouchScreenButton" parent="UI/Inventory/Slot2"]
-scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 102 )
-action = "ui_select_item_2"
-
-[node name="Slot3" type="Sprite" parent="UI/Inventory"]
-position = Vector2( 20, 0 )
-texture = ExtResource( 16 )
-centered = false
-hframes = 2
-
-[node name="Sprite" type="Sprite" parent="UI/Inventory/Slot3"]
-position = Vector2( 5, 5 )
-rotation = -0.785398
-scale = Vector2( 0.4, 0.4 )
-
-[node name="Life" type="Node2D" parent="UI"]
-visible = false
-position = Vector2( 10, 35 )
-
-[node name="Outline" type="TextureRect" parent="UI/Life"]
-margin_right = 16.0
-margin_bottom = 16.0
-texture = ExtResource( 21 )
-stretch_mode = 2
-
-[node name="Hearts" type="TextureRect" parent="UI/Life"]
-margin_bottom = 16.0
-texture = ExtResource( 17 )
-expand = true
-stretch_mode = 2
-
-[node name="Power" type="Node2D" parent="UI"]
-visible = false
-
-[node name="Outline" type="MeshInstance2D" parent="UI/Power"]
-position = Vector2( 67.5, 60 )
-scale = Vector2( 59.5, 6 )
-mesh = SubResource( 103 )
-
-[node name="Bar" type="MeshInstance2D" parent="UI/Power"]
-modulate = Color( 0.478431, 0.827451, 0.329412, 1 )
-position = Vector2( 67.5, 60 )
-scale = Vector2( 57.5, 4 )
-mesh = SubResource( 103 )
-
-[node name="Controls" type="Node2D" parent="UI"]
-position = Vector2( 0, -50 )
-scale = Vector2( 1.5, 1.5 )
-
-[node name="Jump" type="TouchScreenButton" parent="UI/Controls"]
-position = Vector2( 280, 130 )
-scale = Vector2( 2, 2 )
-normal = ExtResource( 18 )
-action = "ui_jump"
-
-[node name="Right" type="TouchScreenButton" parent="UI/Controls"]
-position = Vector2( 60, 160 )
-scale = Vector2( 2, 2 )
-normal = ExtResource( 19 )
-action = "ui_right"
-visibility_mode = 1
-
-[node name="Left" type="TouchScreenButton" parent="UI/Controls"]
-position = Vector2( 30, 160 )
-scale = Vector2( -2, 2 )
-normal = ExtResource( 19 )
-action = "ui_left"
-
-[node name="Use" type="TouchScreenButton" parent="UI/Controls"]
-position = Vector2( 60, 130 )
-scale = Vector2( 2, 2 )
-normal = ExtResource( 20 )
-action = "ui_interact"
-
-[node name="Drop" type="TouchScreenButton" parent="UI/Controls"]
-position = Vector2( 0, 130 )
-scale = Vector2( 2, 2 )
-normal = ExtResource( 22 )
-action = "ui_drop_item"
-
-[node name="ChangeScene" type="TouchScreenButton" parent="UI/Controls"]
-position = Vector2( 0, 34 )
-normal = ExtResource( 5 )
-action = "ui_change_scene"
-
-[node name="JoyStick" type="TouchScreenButton" parent="UI/Controls"]
-position = Vector2( 270, 79.1667 )
-scale = Vector2( 3, 3 )
-normal = ExtResource( 23 )
-
-[node name="Arrow" type="MeshInstance2D" parent="UI/Controls/JoyStick"]
-position = Vector2( 8, 8 )
-rotation = -3.15093
-scale = Vector2( 2, 2 )
-mesh = SubResource( 104 )
+scene_to = "res://Scenes//Worlds//BattleVillage.tscn"
